@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider, useTheme } from './src/context/ThemeContext';
 import { ProfileProvider, useProfile } from './src/context/ProfileContext';
 import AppNavigator from './src/navigation/AppNavigator';
@@ -22,11 +23,13 @@ function Root() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <ProfileProvider>
-        <Root />
-      </ProfileProvider>
-    </ThemeProvider>
+    <SafeAreaProvider>
+      <ThemeProvider>
+        <ProfileProvider>
+          <Root />
+        </ProfileProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
 

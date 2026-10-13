@@ -31,15 +31,21 @@ export function ThemeProvider({ children }) {
     saveJSON(KEYS.THEME, next); // persist
   }, [mode]);
 
+  const resetTheme = useCallback(async () => {
+    setMode('light');
+    await saveJSON(KEYS.THEME, 'light');
+  }, []);
+
   const value = useMemo(
     () => ({
       mode,
       isDark: mode === 'dark',
       colors: mode === 'dark' ? darkColors : lightColors,
       toggleTheme,
+      resetTheme,
       loaded,
     }),
-    [mode, toggleTheme, loaded]
+    [mode, toggleTheme, resetTheme, loaded]
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

@@ -43,7 +43,17 @@ export function ProfileProvider({ children }) {
     return ok;
   }, []);
 
-  const value = useMemo(() => ({ profile, saveProfile, loaded }), [profile, saveProfile, loaded]);
+  // Reset profile về DEFAULT_PROFILE và xóa/ghi đè trong AsyncStorage
+  const resetProfile = useCallback(async () => {
+    const ok = await saveJSON(KEYS.PROFILE, DEFAULT_PROFILE);
+    if (ok) setProfile(DEFAULT_PROFILE);
+    return ok;
+  }, []);
+
+  const value = useMemo(
+    () => ({ profile, saveProfile, resetProfile, loaded }),
+    [profile, saveProfile, resetProfile, loaded]
+  );
 
   return <ProfileContext.Provider value={value}>{children}</ProfileContext.Provider>;
 }

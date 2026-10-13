@@ -45,6 +45,15 @@ export default function ActivityScreen() {
           />
         </View>
       </View>
+      {selectedIds.length > 0 && (
+        <View style={styles.clearBar}>
+          <PrimaryButton
+            title="Bỏ chọn tất cả"
+            variant="secondary"
+            onPress={() => setSelectedIds([])}
+          />
+        </View>
+      )}
       <FlatList
         data={data}
         extraData={selectedIds}
@@ -61,5 +70,6 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   filters: { flexDirection: 'row', padding: 16, paddingBottom: 8 },
   filterBtn: { flex: 1, marginHorizontal: 4 },
+  clearBar: { paddingHorizontal: 20, paddingBottom: 8 },
   list: { padding: 16, paddingTop: 8 },
 });

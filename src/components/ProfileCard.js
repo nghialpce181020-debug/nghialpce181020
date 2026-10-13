@@ -11,8 +11,8 @@ export default function ProfileCard({ profile }) {
     setImageFailed(false);
   }, [profile.avatar]);
 
-  const showImage = profile.avatar && !imageFailed;
-  const initial = profile.name.trim().charAt(0).toUpperCase();
+  const showImage = profile?.avatar && !imageFailed;
+  const initial = (profile?.name || '').trim().charAt(0).toUpperCase() || '?';
 
   return (
     <View style={[styles.card, { backgroundColor: colors.card, borderColor: colors.border }]}>

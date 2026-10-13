@@ -16,9 +16,9 @@ export default function EditProfileScreen({ navigation }) {
   const handleSave = async (values) => {
     setSaving(true);
     const ok = await saveProfile({
-      name: values.name.trim(),
-      bio: values.bio.trim(),
-      avatar: values.avatar.trim(),
+      name: (values.name || '').trim(),
+      bio: (values.bio || '').trim(),
+      avatar: (values.avatar || '').trim(),
     });
     setSaving(false);
     if (ok) {
@@ -35,6 +35,7 @@ export default function EditProfileScreen({ navigation }) {
       keyboardShouldPersistTaps="handled"
     >
       <Formik
+        enableReinitialize
         initialValues={{ name: profile.name, bio: profile.bio, avatar: profile.avatar }}
         validationSchema={profileSchema}
         onSubmit={handleSave}
