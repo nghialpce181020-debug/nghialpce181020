@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { useTheme } from '../context/ThemeContext';
 
 export default function ProfileCard({ profile }) {
   const { colors } = useTheme();
   const [imageFailed, setImageFailed] = useState(false);
+
+  // Đổi URL avatar thì thử tải lại (tránh kẹt ở trạng thái lỗi của URL cũ)
+  useEffect(() => {
+    setImageFailed(false);
+  }, [profile.avatar]);
+
   const showImage = profile.avatar && !imageFailed;
   const initial = profile.name.trim().charAt(0).toUpperCase();
 
